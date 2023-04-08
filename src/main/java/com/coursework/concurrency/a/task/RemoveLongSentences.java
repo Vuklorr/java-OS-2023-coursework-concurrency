@@ -1,26 +1,24 @@
 package com.coursework.concurrency.a.task;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class RemoveLongSentences {
-    /**
-     * Поле File, который ссылается на файл, из которого будут удаляться длинные предложения.
-     */
-    private final File file;
+    private List<Long> methodTimes;
 
-    public RemoveLongSentences(File file) {
-        this.file = file;
+    public RemoveLongSentences(List<Long> methodTimes) {
+        this.methodTimes = methodTimes;
     }
 
     /**
      * Метод удаления предложения, состоящее из более 50 символов.
      * @param pathNewFile - полное имя нового файла (в который будут сохраняться предложения,
      *                   в которых не более 50 символов.
-     * @return - время выполения метода.
      */
-    public long remove(String pathNewFile) throws IOException {
-        long startTime = System.currentTimeMillis(); //начало выполения метода
+    public void remove(File file, String pathNewFile) throws IOException {
+        methodTimes.add(System.currentTimeMillis()); // время начала выполения метода
 
         try(Scanner in = new Scanner(new FileInputStream(file));
             FileWriter fileWriter = new FileWriter(pathNewFile)) {
@@ -36,7 +34,6 @@ public class RemoveLongSentences {
                 }
             }
         }
-        long endTime = System.currentTimeMillis(); //время завершение метода
-        return endTime-startTime;
+        methodTimes.add(System.currentTimeMillis()); //время завершение метода
     }
 }

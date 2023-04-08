@@ -19,26 +19,28 @@ public class Main {
             System.out.println("Введите 2 аргумента:");
             return;
         }
-        List<Long> times = new ArrayList<>(); //массив для хранения времени обработки файлов
-
+        List<Long> methodTimes = new ArrayList<>();
+        RemoveLongSentences removeLongSentences =
+                new RemoveLongSentences(methodTimes);
         long startTime = System.currentTimeMillis(); //время начала работы программы
         String path = args[0];
         String newPath = args[1];
         //обработка 10 файлов
         for(int i = 0; i < 10; i++) {
-            RemoveLongSentences removeLongSentences =
-                    new RemoveLongSentences(new File(path + (i + 1) + ".txt"));
-            long methodTime = removeLongSentences.remove(newPath + (i + 1) + ".txt");
-            times.add(methodTime); // запомнить время обработки 1 файла
+            removeLongSentences.remove(new File(path + (i + 1) + ".txt")
+                    , newPath + (i + 1) + ".txt");
         }
 
         long endTime = System.currentTimeMillis(); //время завершения программы
         System.out.println("Время выполенения программы:" + (endTime - startTime));
         //вывод времен обработки каждого файла
-        int i = 1;
-        for (Long time : times) {
-            System.out.println("Время обработки " + i +  " файла:" + time);
-            i++;
+        int listIndex = 0;//индекс в списке
+        int fileNumber = 1;//номер файла
+        while (fileNumber < 11) {
+            System.out.println("Время начала и конца обработки " + fileNumber +  " файла:"
+                    + methodTimes.get(listIndex) + " " + methodTimes.get(++listIndex));
+            listIndex++;
+            fileNumber++;
         }
     }
 }
