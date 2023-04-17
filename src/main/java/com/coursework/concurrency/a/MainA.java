@@ -2,7 +2,6 @@ package com.coursework.concurrency.a;
 
 import com.coursework.concurrency.a.task.RemoveLongSentences;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +10,7 @@ import java.util.List;
  * Курсовая работа.
  * Долбицын В.С. УИС-311
  * Вариант 8: "Исключить из текста все предложения длиной более 50 символов"
+ * Программа А
  */
 public class MainA {
     public static void main(String[] args) throws IOException {
@@ -19,16 +19,25 @@ public class MainA {
             System.out.println("Введите 2 аргумента:");
             return;
         }
-        List<Long> methodTimes = new ArrayList<>();
-        RemoveLongSentences removeLongSentences =
-                new RemoveLongSentences(methodTimes);
-        long startTime = System.currentTimeMillis(); //время начала работы программы
+
         String path = args[0];
         String newPath = args[1];
+        List<String> fileNames = new ArrayList<>();
+        List<String> newFileNames = new ArrayList<>();
+        //добавление в списки имен файлов
+        for(int i = 1; i < 11; i++) {
+            fileNames.add(path + (i) + ".txt");
+            newFileNames.add(newPath + (i) + ".txt");
+        }
+        List<Long> startTimes = new ArrayList<>(fileNames.size()); //массив для запоминания начала выполенения метода
+        List<Long> endTimes = new ArrayList<>(fileNames.size()); //массив для запоминания конца выполенения метода
+
+        RemoveLongSentences removeLongSentences =
+                new RemoveLongSentences(startTimes, endTimes);
+        long startTime = System.currentTimeMillis(); //время начала работы программы
         //обработка 10 файлов
-        for(int i = 0; i < 10; i++) {
-            removeLongSentences.remove(new File(path + (i + 1) + ".txt")
-                    , newPath + (i + 1) + ".txt");
+        for(int i = 0; i < fileNames.size(); i++) {
+            removeLongSentences.remove(fileNames.get(i), newFileNames.get(i));
         }
 
         long endTime = System.currentTimeMillis(); //время завершения программы
@@ -36,11 +45,10 @@ public class MainA {
         //вывод времен обработки каждого файла
         int listIndex = 0;//индекс в списке
         int fileNumber = 1;//номер файла
-        while (fileNumber < 11) {
-            System.out.println("Время начала и конца обработки " + fileNumber +  " файла:"
-                    + methodTimes.get(listIndex) + " " + methodTimes.get(++listIndex));
-            listIndex++;
-            fileNumber++;
+        for (int i = 0; i < fileNames.size(); i++) {
+            System.out.println("Время начала и конца обработки " + fileNames.get(i) +  " файла:"
+                    + startTimes.get(i) + " " + endTimes.get(i));
+            //System.out.println("File " + fileNames.get(i) + " start time: " + startTimes[i] + ", end time: " + endTimes[i]);
         }
     }
 }

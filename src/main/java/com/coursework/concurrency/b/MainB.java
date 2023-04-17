@@ -4,6 +4,12 @@ import com.coursework.concurrency.b.task.RemoveLongSentences;
 
 import java.util.*;
 
+/**
+ * Курсовая работа.
+ * Долбицын В.С. УИС-311
+ * Вариант 8: "Исключить из текста все предложения длиной более 50 символов"
+ * Программа B
+ */
 public class MainB {
     public static void main(String[] args) {
         //проверка на количество аргументов
@@ -48,7 +54,6 @@ public class MainB {
         for (int i = 0; i < fileNames.size(); i++) {
             System.out.println("Время начала и конца обработки " + fileNames.get(i) +  " файла:"
                     + startTimes[i] + " " + endTimes[i]);
-            //System.out.println("File " + fileNames.get(i) + " start time: " + startTimes[i] + ", end time: " + endTimes[i]);
         }
     }
 

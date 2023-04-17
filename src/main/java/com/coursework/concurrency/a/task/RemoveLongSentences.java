@@ -1,27 +1,36 @@
 package com.coursework.concurrency.a.task;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class RemoveLongSentences {
-    private final List<Long> methodTimes;
 
-    public RemoveLongSentences(List<Long> methodTimes) {
-        this.methodTimes = methodTimes;
+    /**
+     * Массив для сохранения начала времени обработки.
+     */
+    private final List<Long> startTimes;
+
+    /**
+     * Массив для сохранения конца времени обработки.
+     */
+    private final List<Long> endTimes;
+
+    public RemoveLongSentences(List<Long> startTimes, List<Long> endTimes) {
+        this.startTimes = startTimes;
+        this.endTimes = endTimes;
     }
 
     /**
      * Метод удаления предложения, состоящее из более 50 символов.
-     * @param pathNewFile - полное имя нового файла (в который будут сохраняться предложения,
-     *                   в которых не более 50 символов.
+     * @param fileName - имя файла, который нужно обработать
+     * @param newFileName - новое имя файла, в который будет записан обработанный файл
      */
-    public void remove(File file, String pathNewFile) throws IOException {
-        methodTimes.add(System.currentTimeMillis()); // время начала выполения метода
+    public void remove(String fileName, String newFileName) throws IOException {
+        startTimes.add(System.currentTimeMillis()); // время начала выполения метода
 
-        try(Scanner in = new Scanner(new FileInputStream(file));
-            FileWriter fileWriter = new FileWriter(pathNewFile)) {
+        try(Scanner in = new Scanner(new FileInputStream(fileName));
+            FileWriter fileWriter = new FileWriter(newFileName)) {
             //выполняется, пока файл не пуст
             while (in.hasNextLine()) {
                 String sentence = in.nextLine();
@@ -34,6 +43,6 @@ public class RemoveLongSentences {
                 }
             }
         }
-        methodTimes.add(System.currentTimeMillis()); //время завершение метода
+        endTimes.add(System.currentTimeMillis()); //время завершение метода
     }
 }
