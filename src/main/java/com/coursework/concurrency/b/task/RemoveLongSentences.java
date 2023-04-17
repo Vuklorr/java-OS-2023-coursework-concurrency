@@ -4,16 +4,31 @@ import java.io.*;
 import java.util.*;
 
 public class RemoveLongSentences extends Thread {
-    private final int index;
-    private final Long[] startTimes;
-    private final Long[] endTimes;
-    private final String fileName;
-    private final String newFileName;
 
-//    private final File file;
-//    private final String pathNewFile;
-//    int in;
-//    private final Map<Integer, List<Long>> methodTimes;
+    /**
+     * Индекс потока.
+     */
+    private final int index;
+
+    /**
+     * Массив для сохранения начала времени обработки.
+     */
+    private final Long[] startTimes;
+
+    /**
+     * Массив для сохранения конца времени обработки.
+     */
+    private final Long[] endTimes;
+
+    /**
+     * Имя файла, который нужно обработать.
+     */
+    private final String fileName;
+
+    /**
+     * Имя файла, в который нужно записать обработанный файл.
+     */
+    private final String newFileName;
 
     public RemoveLongSentences(int index, Long[] startTimes, Long[] endTimes, String fileName, String newFileName) {
         this.index = index;
@@ -25,7 +40,7 @@ public class RemoveLongSentences extends Thread {
 
     @Override
     public void run()  {
-        startTimes[index] = System.currentTimeMillis();
+        startTimes[index] = System.currentTimeMillis(); // время начала выполнения метода
 
         File file = new File(fileName);
         try(Scanner in = new Scanner(new FileInputStream(file));
@@ -44,6 +59,6 @@ public class RemoveLongSentences extends Thread {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        endTimes[index] = System.currentTimeMillis();
+        endTimes[index] = System.currentTimeMillis(); // время конца выполнения метода
     }
 }
