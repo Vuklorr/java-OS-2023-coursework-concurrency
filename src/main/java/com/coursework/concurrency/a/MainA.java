@@ -43,12 +43,9 @@ public class MainA {
         long endTime = System.currentTimeMillis(); //время завершения программы
         System.out.println("Время выполенения программы:" + (endTime - startTime));
         //вывод времен обработки каждого файла
-        int listIndex = 0;//индекс в списке
-        int fileNumber = 1;//номер файла
         for (int i = 0; i < fileNames.size(); i++) {
             System.out.println("Время начала и конца обработки " + fileNames.get(i) +  " файла:"
                     + startTimes.get(i) + " " + endTimes.get(i));
-            //System.out.println("File " + fileNames.get(i) + " start time: " + startTimes[i] + ", end time: " + endTimes[i]);
         }
     }
 }
