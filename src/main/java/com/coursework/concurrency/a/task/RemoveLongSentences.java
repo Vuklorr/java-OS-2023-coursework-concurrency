@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RemoveLongSentences {
-    private List<Long> methodTimes;
+    private final List<Long> methodTimes;
 
     public RemoveLongSentences(List<Long> methodTimes) {
         this.methodTimes = methodTimes;

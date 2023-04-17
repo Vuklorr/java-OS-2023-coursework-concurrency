@@ -12,7 +12,7 @@ import java.util.List;
  * Долбицын В.С. УИС-311
  * Вариант 8: "Исключить из текста все предложения длиной более 50 символов"
  */
-public class Main {
+public class MainA {
     public static void main(String[] args) throws IOException {
         //проверка на ввод 2-х аргументов
         if(args.length < 2) {
