@@ -49,9 +49,9 @@ public class RemoveLongSentences extends Thread {
             while (in.hasNextLine()) {
                 String sentence = in.nextLine();
                 //найти знак завершения предложения (.?!...)
-                if((sentence.endsWith(".")) || (sentence.endsWith("!")) || sentence.endsWith("?") || sentence.endsWith("...")) {
+                if ((sentence.endsWith(".")) || (sentence.endsWith("!")) || sentence.endsWith("?") || sentence.endsWith("...")) {
                     //если пердложение состоит из 50 или меньше символов - записать его в новый файл
-                    if(sentence.length() <= 50) {
+                    if (sentence.length() <= 50) {
                         fileWriter.write(sentence + '\n');
                     }
                 }

@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class MainC {
     public static void main(String[] args) {
+        long startTime = System.currentTimeMillis(); //время начала работы программы
         //проверка на количество аргументов
         if(args.length < 2) {
             System.out.println("Введите 2 аргумента:");
@@ -31,14 +32,15 @@ public class MainC {
         Long[] startTimes = new Long[fileNames.size()]; //массив для запоминания начала выполенения метода
         Long[] endTimes = new Long[fileNames.size()]; //массив для запоминания конца выполенения метода
 
-        long startTime = System.currentTimeMillis(); //время начала работы программы
+        int priority = Thread.MAX_PRIORITY;
 
         //создание и выполнение дочерних потоков
         for (int i = 0; i < fileNames.size(); i++) {
             threads[i] = new RemoveLongSentences(i, startTimes, endTimes
                     , fileNames.get(i), newFileNames.get(i));
 
-            threads[i].setPriority(Thread.MAX_PRIORITY); // установка максимального приоритета
+            threads[i].setPriority(priority); // установка приоритета
+            priority--;
             threads[i].start();//вызов дочернего потока
         }
 
@@ -54,9 +56,7 @@ public class MainC {
         System.out.println("Время выполенения программы:" + (endTime - startTime));
         for (int i = 0; i < fileNames.size(); i++) {
             System.out.println("Время начала и конца обработки " + fileNames.get(i) +  " файла:"
-                    + startTimes[i] + " " + endTimes[i] + " "
-                    + (endTimes[i] - startTimes[i]));
+                    + startTimes[i] + " " + endTimes[i]);
         }
     }
-
 }

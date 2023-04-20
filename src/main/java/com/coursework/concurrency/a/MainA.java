@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class MainA {
     public static void main(String[] args) throws IOException {
+        long startTime = System.currentTimeMillis(); //время начала работы программы
         //проверка на ввод 2-х аргументов
         if(args.length < 2) {
             System.out.println("Введите 2 аргумента:");
@@ -34,7 +35,6 @@ public class MainA {
 
         RemoveLongSentences removeLongSentences =
                 new RemoveLongSentences(startTimes, endTimes);
-        long startTime = System.currentTimeMillis(); //время начала работы программы
         //обработка 10 файлов
         for(int i = 0; i < fileNames.size(); i++) {
             removeLongSentences.remove(fileNames.get(i), newFileNames.get(i));

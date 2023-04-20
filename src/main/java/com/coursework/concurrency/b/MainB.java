@@ -12,6 +12,7 @@ import java.util.*;
  */
 public class MainB {
     public static void main(String[] args) {
+        long startTime = System.currentTimeMillis(); //время начала работы программы
         //проверка на количество аргументов
         if(args.length < 2) {
             System.out.println("Введите 2 аргумента:");
@@ -31,7 +32,6 @@ public class MainB {
         Long[] startTimes = new Long[fileNames.size()]; //массив для запоминания начала выполенения метода
         Long[] endTimes = new Long[fileNames.size()]; //массив для запоминания конца выполенения метода
 
-        long startTime = System.currentTimeMillis(); //время начала работы программы
 
         //создание и выполнение дочерних потоков
         for (int i = 0; i < fileNames.size(); i++) {
@@ -56,5 +56,4 @@ public class MainB {
                     + startTimes[i] + " " + endTimes[i]);
         }
     }
-
 }
