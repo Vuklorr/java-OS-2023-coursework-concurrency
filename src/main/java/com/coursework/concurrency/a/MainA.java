@@ -4,6 +4,7 @@ import com.coursework.concurrency.a.task.RemoveLongSentences;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,27 +16,22 @@ import java.util.List;
 public class MainA {
     public static void main(String[] args) throws IOException {
         long startTime = System.currentTimeMillis(); //время начала работы программы
-        //проверка на ввод 2-х аргументов
-        if(args.length < 2) {
-            System.out.println("Введите 2 аргумента:");
-            return;
+
+        //добавление в списки имен файлов
+        List<String> fileNames = new ArrayList<>(Arrays.asList(args).subList(0, args.length));
+        List<String> newFileNames = new ArrayList<>();
+        for (String arg : args) {
+            int index = arg.indexOf(".txt");
+            String newName = arg.substring(0, index);
+            newFileNames.add(newName + "_out.txt");
         }
 
-        String path = args[0];
-        String newPath = args[1];
-        List<String> fileNames = new ArrayList<>();
-        List<String> newFileNames = new ArrayList<>();
-        //добавление в списки имен файлов
-        for(int i = 1; i < 11; i++) {
-            fileNames.add(path + (i) + ".txt");
-            newFileNames.add(newPath + (i) + ".txt");
-        }
         List<Long> startTimes = new ArrayList<>(fileNames.size()); //массив для запоминания начала выполенения метода
         List<Long> endTimes = new ArrayList<>(fileNames.size()); //массив для запоминания конца выполенения метода
 
         RemoveLongSentences removeLongSentences =
                 new RemoveLongSentences(startTimes, endTimes);
-        //обработка 10 файлов
+        //обработка файлов
         for(int i = 0; i < fileNames.size(); i++) {
             removeLongSentences.remove(fileNames.get(i), newFileNames.get(i));
         }

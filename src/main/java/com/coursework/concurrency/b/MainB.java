@@ -13,20 +13,14 @@ import java.util.*;
 public class MainB {
     public static void main(String[] args) {
         long startTime = System.currentTimeMillis(); //время начала работы программы
-        //проверка на количество аргументов
-        if(args.length < 2) {
-            System.out.println("Введите 2 аргумента:");
-            return;
-        }
 
-        String path = args[0];
-        String newPath = args[1];
-        List<String> fileNames = new ArrayList<>();
-        List<String> newFileNames = new ArrayList<>();
         //добавление в списки имен файлов
-        for(int i = 1; i < 11; i++) {
-            fileNames.add(path + (i) + ".txt");
-            newFileNames.add(newPath + (i) + ".txt");
+        List<String> fileNames = new ArrayList<>(Arrays.asList(args).subList(0, args.length));
+        List<String> newFileNames = new ArrayList<>();
+        for (String arg : args) {
+            int index = arg.indexOf(".txt");
+            String newName = arg.substring(0, index);
+            newFileNames.add(newName + "_out.txt");
         }
         Thread[] threads = new Thread[fileNames.size()];
         Long[] startTimes = new Long[fileNames.size()]; //массив для запоминания начала выполенения метода
